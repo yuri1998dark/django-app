@@ -1,0 +1,17 @@
+<h1>Estamos en descargar peliculas</h1>
+
+{{title}}
+{{year}}
+
+<h1>Videos</h1>
+{{videos}}
+{% if videos %}
+<ul>
+ {% for video in videos %}
+    <li><a href="{{ video }}">{{ video }}</a></li>
+{% endfor %}
+</ul>
+    {% else %}
+        <p>No se encontraron videos.</p>
+    {% endif %}
+

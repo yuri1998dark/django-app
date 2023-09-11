@@ -8,16 +8,20 @@
     <button type="submit">Buscar</button>
 </form>
 
-{% if query %}
+{% if query.Response == 'True'  %}
 <h1>La pelicula fue encontrada</h1>
 <img src={{query.Poster}} >
 <h1>{{query.Title}}</h1>
+
 <h1>{{query.Actors}}</h1>
 <h1>{{query.Plot}}</h1>
+<h1>Desea descargar la pelicula?</h1>
+<a href="{% url 'peliculas:descargar_pelicula' query.Year query.Title  %}" >Descargar</a>
+{% comment %} a href="{% url 'polls:detail' question.id %}">
+{{ question.question_text }}</a> {% endcomment %}
+{% else %}
+
+<h1>La pelicula no fue encontrada</h1>
+{% endif %} 
 
 
-
-
-
-
-{% endif %}

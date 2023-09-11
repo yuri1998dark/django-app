@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import BusquedaForm
 import requests
 from django.http import JsonResponse
+from bs4 import BeautifulSoup
 
 
 
@@ -17,7 +18,7 @@ def busqueda_view(request):
             print(response)
             if response.status_code == 200:
                 datos_json = response.json()
-                print(datos_json)
+                # print(datos_json)
                 
                 return render(request, template_name, {'form': form, 'query': datos_json})
             
@@ -29,13 +30,31 @@ def busqueda_view(request):
 
 
 
-# def descargar_pelicula_view(request,title,year):
-#     template_name = 'descargar-pelicula.html'
-#     return render(request, template_name)
-    
-    
-    
+def descargar_pelicula_view(request,year,title):
+    template_name = 'descargar-pelicula.html'
+    url = 'https://visuales.uclv.cu/Peliculas/Extranjeras/{}/{}({})'.format(year,title,year)
+    print(url)
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, 'html.parser')
+            videos = []
 
+            for link in soup.find_all('a'):
+                href = link.get('href')
+                print(href)
+                if href and href.endswith(('.mp4', '.mkv', '.mpg')):
+                    videos.append(href)
+                    print(videos)
+
+            return render(request, template_name, { 'year': year,'title': title ,'videos': videos})
+    except requests.exceptions.RequestException:
+        pass
+    
+    return render(request, template_name,{ 'year': year,'title': title,'videos': []})
+    
+    
+    
 
 
 
