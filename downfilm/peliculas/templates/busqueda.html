@@ -1,0 +1,23 @@
+
+<h1>Hola estoy en peliculas</h1>
+
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Buscar</button>
+</form>
+
+{% if query %}
+<h1>La pelicula fue encontrada</h1>
+<img src={{query.Poster}} >
+<h1>{{query.Title}}</h1>
+<h1>{{query.Actors}}</h1>
+<h1>{{query.Plot}}</h1>
+
+
+
+
+
+
+{% endif %}
