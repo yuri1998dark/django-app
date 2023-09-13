@@ -10,13 +10,20 @@
 
 {% if query.Response == 'True'  %}
 <h1>La pelicula fue encontrada</h1>
-<img src={{query.Poster}} >
-<h1>{{query.Title}}</h1>
+{% for titulo in query.Search %}
 
-<h1>{{query.Actors}}</h1>
-<h1>{{query.Plot}}</h1>
+<li>
+<img src={{titulo.Poster}}>
+<h1>{{titulo.Title}}</h1>
+
+<h1>{{titulo.Actors}}</h1>
+<h1>{{titulo.Plot}}</h1>
 <h1>Desea descargar la pelicula?</h1>
-<a href="{% url 'peliculas:descargar_pelicula' query.Year query.Title  %}" >Descargar</a>
+<a href="{% url 'peliculas:descargar_pelicula' query.Search.Year query.Search.Title  %}" >Descargar</a>
+</li>
+
+
+{% endfor %}
 {% comment %} a href="{% url 'polls:detail' question.id %}">
 {{ question.question_text }}</a> {% endcomment %}
 {% else %}
