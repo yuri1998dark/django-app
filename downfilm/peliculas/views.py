@@ -4,18 +4,15 @@ import requests
 from django.http import JsonResponse
 from bs4 import BeautifulSoup
 
-
-
-
-
 def busqueda_view(request):
     template_name = 'busqueda.html'
     
     if request.method == 'POST':
         form = BusquedaForm(request.POST)
         if form.is_valid():
-            pelicula = form.cleaned_data['pelicula']
-            response = requests.get(f'http://www.omdbapi.com/?apikey=93414632&s={pelicula}&page=2')
+            pelicula = form.cleaned_data['nombre']
+            select_field  = form.cleaned_data['select_field']
+            response = requests.get(f'https://www.omdbapi.com/?apikey=93414632&s={pelicula}&page2&type={ select_field}')
             print(response)
             if response.status_code == 200:
                 datos_json = response.json()
