@@ -12,7 +12,7 @@ def busqueda_view(request):
         if form.is_valid():
             pelicula = form.cleaned_data['nombre']
             select_field  = form.cleaned_data['select_field']
-            response = requests.get(f'https://www.omdbapi.com/?apikey=93414632&s={pelicula}&page2&type={ select_field}')
+            response = requests.get(f'https://www.omdbapi.com/?apikey=93414632&s={pelicula}&page2&type={select_field}')
             print(response)
             if response.status_code == 200:
                 datos_json = response.json()
@@ -43,17 +43,17 @@ def descargar_pelicula_view(request,year,titulo:str):
             soup = BeautifulSoup(response.text, 'html.parser')
             
             videos = []
-
+           
             for link in soup.find_all('a'):
                 # print(link)
                 href = link.get('href')
                 # print(href)
-                if href and href.endswith(('.mp4', '.mkv', '.mpg','srt')):
+                if href and href.endswith(('.rmvb','.avi','.mp4', '.mkv', '.mpg','.srt')):
                     videos.append(href)
                     print(videos)
                    
              
-            return render(request, template_name, { 'year': year,'title1': titulo1 ,'videos': videos})
+            return render(request, template_name, { 'year': year,'title1': titulo1 ,'videos': videos,'urlls':url})
     except requests.exceptions.RequestException:
         pass
     

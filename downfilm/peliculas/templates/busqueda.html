@@ -21,7 +21,7 @@
           <img src="{{ titulo.Poster }}" class="card-img-top" width="300" height="200">
           <div class="card-body">
             <h5 class="card-title">{{ titulo.Title }}</h5>
-            <p class="card-text">{{ titulo.Actors }}</p>
+            <p class="card-text">{{ titulo.Year }}</p>
             <p class="card-text">{{ titulo.Plot }}</p>
             <h1>Link de descarga</h1>
             <a href="{% url 'peliculas:descargar_pelicula' titulo.Year titulo.Title %}" class="btn btn-primary">Download</a> 

@@ -2,13 +2,16 @@
 
 {{title1}}
 {{year}}
-
+{{urlls}}
 <h1>Videos</h1>
-{{videos}}
+
 {% if videos %}
 <ul>
  {% for video in videos %}
-    <li><a href="{{ video }}">{{ video }}</a></li>
+    <li>
+        <a href="{{ urlls|add:video}}">{{ video }}</a>
+        {% comment %} <a href="{{ urlls|add sub}}">{{ sub }}</a> {% endcomment %}
+    </li>
 {% endfor %}
 </ul>
     {% else %}

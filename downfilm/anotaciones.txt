@@ -1,3 +1,2 @@
-1 La vista que traiga las peliculas de la api traiga un arreglo de peliculas
-2 en la plantilla de dicha vista agregar cards para visualizar cada pelicula
+poner los link de descarga directos
 
